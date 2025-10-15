@@ -136,6 +136,10 @@ runs:
             echo "[Case ${n}] 실행 오류 (RE)"
             continue
           fi
+          if [ ! -f "$HOME/workdir/${n}.out" ]; then
+            echo "[Case ${n}] 형식 오류 (PE)"
+            continue
+          fi
           BYTES=$(stat -c%s "$HOME/workdir/${n}.out")
           if [ "$BYTES" -gt ${{ inputs.output-limit }} ]; then
             echo "[Case ${n}] 출력 초과 (OLE)"
